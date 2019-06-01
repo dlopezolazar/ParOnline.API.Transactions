@@ -12,9 +12,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import py.una.pol.paronline.api.transactions.entity.Transaction;
-import py.una.pol.paronline.api.transactions.repository.JdbcTransactionRepository;
-import py.una.pol.paronline.api.transactions.service.TransactionServiceImpl;
+import py.una.pol.paronline.api.transactions.repository.JdbcTransactionCabRepository;
+import py.una.pol.paronline.api.transactions.repository.JdbcTransactionDetRepository;
+import py.una.pol.paronline.api.transactions.service.TransactionCabServiceImpl;
+import py.una.pol.paronline.api.transactions.service.TransactionDetServiceImpl;
+import py.una.pol.paronline.commons.domain.entity.transactions.Transaction;
 
 /**
  *
@@ -23,7 +25,8 @@ import py.una.pol.paronline.api.transactions.service.TransactionServiceImpl;
 @Path("/v1/transactions")
 public class TransactionRestService {
     
-    private final TransactionServiceImpl transactionService = new TransactionServiceImpl(new JdbcTransactionRepository());
+    private final TransactionCabServiceImpl transactionService = new TransactionCabServiceImpl(new JdbcTransactionCabRepository());
+    private final TransactionDetServiceImpl transactionDetService = new TransactionDetServiceImpl(new JdbcTransactionDetRepository());
 
     @GET
     @Path("/")
@@ -36,10 +39,23 @@ public class TransactionRestService {
     @GET
     @Path("/{id}")
     @Produces("application/json")
-    public Transaction getTransaction(@PathParam("id") Integer id) {
+    public Transaction getTransactionCab(@PathParam("id") Integer id) {
         Transaction entity = null;
         try {
             entity = (Transaction) transactionService.findById(id);
+        } catch (Exception ex) {
+            Logger.getLogger(TransactionRestService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return entity;
+    }
+    
+    @GET
+    @Path("/detail/{id}")
+    @Produces("application/json")
+    public Transaction getTransactionCabDet(@PathParam("id") Integer id) {
+        Transaction entity = null;
+        try {
+            entity = (Transaction) transactionDetService.findById(id);
         } catch (Exception ex) {
             Logger.getLogger(TransactionRestService.class.getName()).log(Level.SEVERE, null, ex);
         }

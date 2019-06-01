@@ -5,13 +5,14 @@
  */
 package py.una.pol.paronline.api.transactions.repository;
 
-import py.una.pol.paronline.api.transactions.entity.Transaction;
 import py.una.pol.paronline.commons.domain.repository.Repository;
 
 /**
  *
  * @author dlopez
+ * @param <Transaction>
+ * @param <Integer>
  */
-public interface TransactionRepository extends Repository<Transaction, Integer>{
+public interface TransactionCabRepository<Transaction, Integer> extends Repository<Transaction, Integer>{
     
 }

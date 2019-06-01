@@ -5,28 +5,28 @@
  */
 package py.una.pol.paronline.api.transactions.service;
 
-import py.una.pol.paronline.api.transactions.entity.Transaction;
 import py.una.pol.paronline.commons.domain.entity.Entity;
+import py.una.pol.paronline.commons.domain.entity.transactions.TransactionDet;
 
 /**
  *
  * @author dlopez
  */
-public interface TransactionService {
+public interface TransactionDetService {
     
     /**
      *
-     * @param user
+     * @param transaction
      * @throws Exception
      */
-    public void add(Transaction user) throws Exception;
+    public void add(TransactionDet transaction) throws Exception;
 
     /**
      *
-     * @param user
+     * @param transaction
      * @throws Exception
      */
-    public void update(Transaction user) throws Exception;
+    public void update(TransactionDet transaction) throws Exception;
 
     /**
      *
@@ -42,4 +42,5 @@ public interface TransactionService {
      * @throws Exception
      */
     public Entity findById(Integer id) throws Exception;
+    
 }
